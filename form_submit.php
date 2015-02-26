@@ -35,12 +35,28 @@
   $b_hasPhoto =  ((!$_FILES["photo"]["error"]) && $_FILES["photo"]["type"]=="image/jpeg");
   $b_hasEmail = (!(filter_var($ass_values["email"],FILTER_VALIDATE_EMAIL) == false));
   $b_hasDOB = preg_match("/[0-9][0-9]-(0[0-9]|1[0-2])-[0-9]{4}/",$ass_values["date-of-birth"]);
-
   $b_allClear = ($b_correctCourseCount && $b_hasAllValues && $b_hasPhoto && $b_hasEmail && $b_hasDOB);
   
   $result = "";
 
-  if ($b_allClear) {
+
+    $ftp_server = "localhost";
+    $ftp_username = "php";
+    $ftp_userpass = "TYPE:PHP";
+    $ftp_conn = ftp_connect($ftp_server) or $result = "Could not connect to server";
+    if ($result == "") {
+      $login = ftp_login($ftp_conn,$ftp_username, $ftp_userpass) or $result = "Could not authenticate to server";
+      if ($result == "") {
+        $file = $_FILES["photo"]['tmp_name'];
+        $up_filename = $ass_values['email'] . ".jpg";
+        $up_dir = "/";
+        if (!(ftp_put($ftp_conn,$up_dir.$up_filename,$file,FTP_BINARY))) {
+          $result = "Could not upload file to FTP server";
+        }
+      }
+    }
+
+  if ($b_allClear && $result == "") {
     $_SESSION['check'] = true;
     $_SESSION['first-name'] = $ass_values['first-name'];
     $_SESSION['last-name'] = $ass_values['last-name'];

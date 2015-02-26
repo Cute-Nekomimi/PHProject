@@ -76,7 +76,7 @@
     $sql_enroll->execute();
     $sql_enroll->closeCursor();
 
-    $ftp_server = "localhost";
+    /*$ftp_server = "localhost";
     $ftp_username = "php";
     $ftp_userpass = "TYPE:PHP";
     $ftp_conn = ftp_connect($ftp_server) or $result = "Could not connect to server";
@@ -90,7 +90,7 @@
           $result = "Could not upload file to FTP server";
         }
       }
-    }
+    }*/
     if ($result == "") {
       $db->commit();
       
