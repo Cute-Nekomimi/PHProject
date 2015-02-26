@@ -40,7 +40,6 @@
   $cols = $sql_query->fetchColumn();
   $sql_query->closeCursor();
 
-
   $b_correctCourseCount = ($cols==4);
   $b_hasAllValues = ($b_firstNameExists && $b_lastNameExists && $b_emailExists && $b_dobExists);
   $b_hasPhoto =  ((!$_FILES["photo"]["error"]) && $_FILES["photo"]["type"]=="image/jpeg");
@@ -116,10 +115,67 @@
   <head>
     <meta charset="shift_jis">
     <title>Form</title>
+    <link rel="stylesheet" type="text/css" href="confirm_style.css">
   </head>
   <body>
     <?php 
-      echo $result;
+      if ($result != "") {
+        echo $result;
+        die;
+      }
      ?>
+    <div id="data">
+      <div class="table">
+
+        <div class="table-row">
+          <div class="table-cell table-start cell-left">
+            <span class="head">Name</span>
+          </div>
+          <div class="table-cell table-start cell-right">
+            <span class="content"><?php echo $ass_values['last-name'] . ", ". $ass_values['first-name']; ?></span>
+          </div>
+        </div>
+
+        <div class="table-row">
+          <div class="table-cell cell-left">
+            <span class="head">Email:</span>
+          </div>
+          <div class="table-cell cell-right">
+            <span class="content"><?php echo $ass_values['email']; ?></span>
+          </div>
+        </div>
+
+        <div class="table-row">
+          <div class="table-cell cell-left">
+            <span class="head">Date of Birth:</span>
+          </div>
+          <div class="table-cell cell-right">
+            <span class="content"><?php echo $ass_values['date-of-birth']; ?></span>
+          </div>
+        </div>
+
+        <div class="table-row">
+          <div class="table-cell cell-left">
+            <span class="head">Courses:</span>
+          </div>
+          <div class="table-cell cell-right">
+            <span class="content"><?php echo str_replace("-"," ",$asi_course1[0]) . $asi_course1[1]; ?><br/>
+                                  <?php echo str_replace("-"," ",$asi_course2[0]) . $asi_course2[1]; ?><br/>
+                                  <?php echo str_replace("-"," ",$asi_course3[0]) . $asi_course3[1]; ?><br/>
+                                  <?php echo str_replace("-"," ",$asi_course4[0]) . $asi_course4[1]; ?></span>
+          </div>
+        </div>
+
+        <div class="table-row">
+          <div class="table-cell table-end cell-left">
+            <span class="head">Image:</span>
+          </div>
+          <div class="table-cell table-end cell-right">
+            <img class="content" src="images/<?php echo $ass_values['email'] . ".jpg";?>" alt="Your Image"/>
+         </div>
+        </div>
+
+      </div> 
+    </div> 
   </body>
 </html>
