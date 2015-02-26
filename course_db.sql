@@ -27,3 +27,15 @@ CREATE TRIGGER `enrollment_insert`
   BEGIN
     SELECT RAISE(ABORT,"Student is already enrolled in 4 courses");
   END;
+
+INSERT INTO `course`(`name`,`grade`)  VALUES
+  ("Accounting",11),
+  ("Biology",11),
+  ("Communications",12),
+  ("Digital-Arts",11),
+  ("English",12),
+  ("French",11),
+  ("History",12),
+  ("Law",12),
+  ("Physical-Education",10),
+  ("Robotics",11);
