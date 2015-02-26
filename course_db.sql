@@ -5,15 +5,17 @@ CREATE TABLE `course` (
 );
 
 CREATE TABLE `student` (
-  `name` TEXT PRIMARY KEY
+  `email` TEXT PRIMARY KEY,
+  `first_name` TEXT NOT NULL,
+  `last_name` TEXT NOT NULL
 );
 
 CREATE TABLE `enrollment` (
-  `student` TEXT,
+  `email` TEXT,
   `course` TEXT,
   `grade` INT,
-  PRIMARY KEY(`student`,`course`,`grade`),
-  FOREIGN KEY(`student`) REFERENCES `student`(`name`)
+  PRIMARY KEY(`email`,`course`,`grade`),
+  FOREIGN KEY(`email`) REFERENCES `student`(`email`)
     ON UPDATE CASCADE
     ON DELETE CASCADE,
   FOREIGN KEY(`course`,`grade`) REFERENCES `course`(`name`,`grade`)
