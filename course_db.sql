@@ -25,9 +25,23 @@ CREATE TABLE `enrollment` (
 
 CREATE TRIGGER `enrollment_insert`
   BEFORE INSERT ON `enrollment`
-  WHEN (SELECT count(*) FROM `enrollment` WHERE `student`=NEW.`student`)>=4
+  WHEN (SELECT count(*) FROM `enrollment` WHERE `email`=NEW.`email`)>=4
   BEGIN
     SELECT RAISE(ABORT,"Student is already enrolled in 4 courses");
+  END;
+
+CREATE TRIGGER `student_insert`
+  AFTER INSERT ON `student`
+  WHEN (length(NEW.`last_name`)>1)
+  BEGIN
+    UPDATE `student` SET `last_name`=substr(NEW.`last_name`,1,1) WHERE `email`=NEW.`email`;
+  END;
+
+CREATE TRIGGER `student_update`
+  AFTER UPDATE ON `student`
+  WHEN (length(NEW.`last_name`)>1)
+  BEGIN
+    UPDATE `student` SET `last_name`=substr(NEW.`last_name`,1,1) WHERE `email`=NEW.`email`;
   END;
 
 INSERT INTO `course`(`name`,`grade`)  VALUES
