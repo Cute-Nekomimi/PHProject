@@ -48,10 +48,12 @@
   $b_allClear = ($b_correctCourseCount && $b_hasAllValues && $b_hasPhoto && $b_hasEmail && $b_hasDOB);
   
   if ($b_allClear) {
-    $result = "yayz!";
-  }
-  else {
-    $result = "$b_correctCourseCount $b_hasAllValues $b_hasPhoto $b_hasEmail $b_hasDOB";
+    $s_mailTo = "php-project-test-mail@mailinator.com";
+    $s_mailSub = "Enrollment from " . $ass_values['first-name'];
+    $s_mailMes = "Name: " . $ass_values['last-name'] . ", " . $ass_values['first-name'] . "\n\rEmail: " . $ass_values['email'] . "\n\rDate of Birth: " . $ass_values['date-of-birth'] . "\n\rCourse 1: " . $asi_course1[0] . $asi_course1[1] . "\n\rCourse 2: " . $asi_course2[0] . $asi_course2[1] . "\n\rCourse 3: " . $asi_course3[0] . $asi_course3[1] . "\n\rCourse 4: " . $asi_course4[0] . $asi_course4[1] . "";
+    $s_mailHead = "From: Mister.Bushido@00.com" . "\r\n";
+    //mail($s_mailTo,$s_mailSub,$s_mailMes,$s_mailHead);
+    //mail($ass_values['email'],$s_mailSub,$s_mailMes,$s_mailHead);
   }
 ?>
 
