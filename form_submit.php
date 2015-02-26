@@ -108,6 +108,19 @@
       $db->rollBack();
     }
   }
+  else {
+    if (!$b_hasAllValues) {
+      $result = "Required form values missing";
+    } elseif (!$b_hasPhoto) {
+      $result = "Photo missing or not a jpg";
+    } elseif (!$b_hasEmail) {
+      $result = "Email in invalid format";
+    } elseif (!$b_hasDOB) {
+      $result = "Date of birth in invalid format";
+    } elseif (!$b_correctCourseCount) {
+      $result = "Duplicate course selected";
+    }
+  }
 ?>
 
 <!DOCTYPE html>
