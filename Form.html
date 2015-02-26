@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="shift_jis">
+    <title>Student Enrollment Form</title>
+  </head>
+  <body>
+		<form method="POST" action="form_submit.php" enctype="multipart/form-data">
+      <div id="s-info" class="input-group">
+        <div class="input-table">
+
+          <div class="input-row">
+            <div class="input-cell cell-left table-start">
+              <span class="input-label">First Name</span>
+            </div>
+            <div class="input-cell cell-right table-start">
+              <input type="text" name="first-name" size=15>
+            </div>
+          </div>
+
+          <div class="input-row">
+            <div class="input-cell cell-left">
+              <span class="input-label">Last Name</span>
+            </div>
+            <div class="input-cell cell-right">
+              <input type="text" name="last-name" size=15>
+            </div>
+          </div>
+
+          <div class="input-row">
+            <div class="input-cell cell-left">
+              <span class="input-label">Email</span>
+            </div>
+            <div class="input-cell cell-right">
+              <input type="text" name="email" size=30>
+            </div>
+          </div>
+
+          <div class="input-row">
+            <div class="input-cell cell-left table-end">
+              <span class="input-label">Date of Birth (dd-mm-yyyy)</span>
+            </div>
+            <div class="input-cell cell-right table-end">
+              <input type="text" name="date-of-birth" size=10>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </form>
+  </body>
+</html>
