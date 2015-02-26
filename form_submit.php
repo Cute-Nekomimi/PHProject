@@ -13,6 +13,7 @@
 
   $db = new PDO("sqlite:course.db");
 
+
   $ass_values = $_POST; //[a]rray (Type) [s]tring (Key) [s]tring (Value)
   $b_firstNameExists = preg_match("/\S+/",$ass_values["first-name"]);
   $b_lastNameExists = preg_match("/\S+/",$ass_values["last-name"]);
@@ -35,10 +36,23 @@
   $sql_query->bindParam(":grade4",$asi_course4[1]);
 
   $sql_query->execute();
-  $result = $sql_query->fetchColumn();
+  $cols = $sql_query->fetchColumn();
 
 
-  $b_correctCourseCount = ($result==4);
+  $b_correctCourseCount = ($cols==4);
+  $b_hasAllValues = ($b_firstNameExists && $b_lastNameExists && $b_emailExists && $b_dobExists);
+  $b_hasPhoto =  ((!$_FILES["photo"]["error"]) && $_FILES["photo"]["type"]=="image/jpeg");
+  $b_hasEmail = (!(filter_var($ass_values["email"],FILTER_VALIDATE_EMAIL) == false));
+  $b_hasDOB = preg_match("/[0-9][0-9]-(0[0-9]|1[0-2])-[0-9]{4}/",$ass_values["date-of-birth"]);
+
+  $b_allClear = ($b_correctCourseCount && $b_hasAllValues && $b_hasPhoto && $b_hasEmail && $b_hasDOB);
+  
+  if ($b_allClear) {
+    $result = "yayz!";
+  }
+  else {
+    $result = "$b_correctCourseCount $b_hasAllValues $b_hasPhoto $b_hasEmail $b_hasDOB";
+  }
 ?>
 
 <!DOCTYPE html>
